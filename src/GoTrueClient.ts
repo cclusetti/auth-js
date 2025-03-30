@@ -1571,6 +1571,8 @@ export default class GoTrueClient {
    * Checks if the current URL and backing storage contain parameters given by a PKCE flow
    */
   private async _isPKCECallback(params: { [parameter: string]: string }): Promise<boolean> {
+    const href = window.location.href
+    if (href.includes('/google-oauth-callback')) return false
     const currentStorageContent = await getItemAsync(
       this.storage,
       `${this.storageKey}-code-verifier`
